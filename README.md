@@ -160,5 +160,4 @@ In package.json you can find following scripts:
 
 ## Acknowledgments
 
-* [IBA](http://iba-world.com/) resources were used to create list of cocktails
 * Inspired by Mateusz Siek visualisation of various cocktails
