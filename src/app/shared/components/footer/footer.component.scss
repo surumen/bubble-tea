@@ -1,0 +1,19 @@
+@import 'abstracts';
+
+footer {
+  letter-spacing: 0.3rem;
+  word-spacing: 0.1rem;
+  border-top: $border-line;
+  background: rgba($gray, 0.2);
+  height: 2rem;
+}
+
+.github-link {
+  position: absolute;
+  right: 2rem;
+  height: 2rem;
+  overflow: hidden;
+  img {
+    height: 100%;
+  }
+}

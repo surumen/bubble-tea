@@ -1,0 +1,92 @@
+@import 'abstracts';
+
+svg {
+  flex-basis: 25rem;
+}
+
+.vis-container {
+  position: relative;
+  height: 55vh;
+  padding: 0rem 2rem;
+  display: flex;
+  .drinks-list {
+    z-index: 10;
+    flex: 1;
+  }
+  .ingredients-list {
+    text-transform: capitalize;
+    flex: 1;
+    text-align: left;
+    text-shadow: 1px 1px white;
+    ul {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      li {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+        .ingredient-amount {
+          font-weight: lighter;
+          text-transform: none;
+        }
+      }
+    }
+    .custom-ingredients {
+      position: absolute;
+      bottom: 0;
+      color: $green;
+    }
+  }
+}
+
+.type-of-drink {
+  font-weight: lighter;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.path--glass-path {
+  fill: rgba($gray, 0.1);
+  stroke: $gray;
+  stroke-width: 0.1px;
+  stroke-dasharray: 1, 1.2;
+}
+
+.drink-description {
+  font-weight: 200;
+  font-size: 1.3rem;
+  max-width: 60rem;
+  margin: auto;
+  padding: 0rem 2rem;
+}
+
+svg {
+  .loading-rect {
+    fill: $blue;
+    transform-origin: 22.5px 51px;
+    animation: fillIn 5s linear infinite;
+  }
+}
+
+@keyframes fillIn {
+  from {
+    transform: scale(1, 0);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}

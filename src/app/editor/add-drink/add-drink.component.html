@@ -1,0 +1,73 @@
+<form class="glass-form" [formGroup]="form" (ngSubmit)="saveDrink()" *ngIf="form" novalidate>
+    <h1 mat-dialog-title>
+        Add drink
+    </h1>
+    <div mat-dialog-content>
+        <div class="__slider-container">
+            <mat-slide-toggle matInput formControlName="active" placeholder="Active" #slideToggle>
+                {{slideToggle.checked ? 'Enabled' : 'Disabled'}}
+            </mat-slide-toggle>
+        </div>
+        <mat-form-field class="full-width">
+            <input matInput formControlName="name" placeholder="Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-select matInput formControlName="type" placeholder="Type">
+                <mat-option *ngFor="let type of drinkTypes" [value]="type">{{type}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <textarea matInput formControlName="description" placeholder="Description"></textarea>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-select matInput formControlName="glass" placeholder="Glass">
+                <mat-option *ngFor="let glass of glassesAvail" [value]="glass">{{glass.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div formArrayName="ingredients" class="well well-lg">
+            <div>
+                Ingredients
+
+                <button type="button" mat-icon-button class="app-table--add-button" (click)="addIngredient()">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </div>
+            <div class="__ingredients-list">
+                <div *ngFor="let ingContr of ingredients.controls; let i=index" [formGroupName]="i">
+                    <div class="grid-x  grid-margin-x grid-margin-y __ingrediend-row">
+                        <div class="cell small-4">
+                            <mat-form-field>
+                                <input type="text" matInput formControlName="def" [matAutocomplete]="auto" (keydown)="filterIngredients($event)">
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="ingredientDisplayFn">
+                                    <mat-option *ngFor="let ingredientDef of filteredIngredients"
+                                                [value]="ingredientDef">
+                                        {{ ingredientDef.name }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="cell small-3">
+                            <input type="number" matInput formControlName="amount" placeholder="Amount">
+                        </div>
+                        <div class="cell small-3">
+                            <input matInput formControlName="customAmount" placeholder="Custom amount">
+                        </div>
+                        <div class="cell small-2 __remove-ingredient-cell">
+                            <button type="button" mat-icon-button class="app-table--remove-button"
+                                    (click)="removeIngredient(i)">
+                                <mat-icon>remove_circle</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-buttons">
+        <button type="submit" [disabled]="form.pristine || form.invalid" mat-raised-button color="primary">
+            {{form.value.id ? 'SAVE' : 'ADD'}}
+        </button>
+        <button type="reset" mat-raised-button (click)="dialogRef.close()" color="warn">CANCEL</button>
+    </div>
+</form>

@@ -1,0 +1,18 @@
+@import 'abstracts';
+
+.content {
+  min-height: calc(100vh - 6.6rem);
+  overflow: hidden;
+}
+
+@media (max-width: $mobile-breaking-point) {
+  .content {
+    min-height: calc(100vh - 4rem);
+  }
+}
+
+::ng-deep {
+  app-header, app-footer {
+    text-align: center;
+  }
+}

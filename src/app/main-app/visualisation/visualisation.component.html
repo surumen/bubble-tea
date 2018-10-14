@@ -1,0 +1,51 @@
+<div class="vis-container">
+    <div class="drinks-list">
+        <app-drinks-list></app-drinks-list>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 45 60"
+         [class.loading]="loading"
+         #svgContainer>
+        <g class="g--ingredients">
+            <g style="clip-path: url(#clipping-mask);-webkit-clip-path: url(#clipping-mask);">
+                <g>
+                    <rect x="13.5" y="2" width="18" height="51" class="loading-rect"></rect>
+                </g>
+            </g>
+        </g>
+        <g class="g--clip">
+            <path class="path--glass-path" [attr.d]="loadingGlass"></path>
+            <clipPath id="clipping-mask">
+                <path [attr.d]="loadingMask"></path>
+            </clipPath>
+        </g>
+    </svg>
+    <div class="ingredients-list">
+        <ul class="custom-ingredients" *ngIf="!animating && customIngredients.length>0">
+            <li *ngFor="let ingredient of customIngredients; index as i" [style.animation-delay.ms]="i*100">
+                <div>
+                <span class="ingredient-amount">
+                + {{ingredientsAmount[ingredient.id].amount || ingredientsAmount[ingredient.id].customAmount }}
+                </span>
+                    <span class="ingredient-name"> {{ingredient.name}}</span>
+                </div>
+            </li>
+        </ul>
+        <ul [style.top.%]="listTop" [style.height.%]="listHeight" *ngIf="!animating">
+            <li *ngFor="let ingredient of baseIngredients; index as i"
+                [style.flex]="ingredientsAmount[ingredient.id].amount"
+                [style.animation-delay.ms]="i*100">
+                <div>
+                    <span class="ingredient-amount">{{ingredientsAmount[ingredient.id].amount }}cl of</span>
+                    <span class="ingredient-name"> {{ingredient.name}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="type-of-drink">
+    {{drinkType}}
+</div>
+<div class="drink-description">
+    <app-description></app-description>
+</div>

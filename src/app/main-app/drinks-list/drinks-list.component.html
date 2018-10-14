@@ -1,0 +1,34 @@
+<button class="button md-button list-visibility show-list" (click)="mobileListVisible=true" *ngIf="!loading">
+    <img src="./assets/menu.svg">
+</button>
+<div class="main-container" [class.mobile-list-visible]="mobileListVisible" *ngIf="!loading">
+    <button class="button md-button list-visibility hide-list" (click)="mobileListVisible=false">CLOSE</button>
+    <div class="search-box">
+        <input type="text" name="search" placeholder="Search drinks" [formControl]="searchControl">
+        <button (click)="resetSearchQuery()">x</button>
+    </div>
+    <div class="list" #drinksList>
+        <ul>
+            <a *ngFor="let drink of visibleDrinks"
+               class="{{getDrinkAlcoholsClass(drink)}}"
+               (click)="selectDrinkById(drink.id)"
+               [routerLink]="['/']"
+               [queryParams]="{ drink: drink.name.toLowerCase() }" routerLinkActive="active">
+                <li [class.active]="currentDrink?.id === drink.id">
+                    {{drink.name}}
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="filters">
+        <div> Filter by alcohol</div>
+        <button *ngFor="let type of alcoholTypes"
+                (click)="toggleFilterType(type)"
+                class="button sm-button filter-button {{type}}"
+                [class.active]="filters.types[type]">
+            {{type}}
+        </button>
+        <button class="button sm-button reset" (click)="resetTypeFilter()">reset</button>
+    </div>
+</div>
